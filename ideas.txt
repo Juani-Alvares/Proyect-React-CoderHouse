@@ -1,0 +1,13 @@
+ 
+localhost-
+  VITE v7.2.2  ready in 324 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+
+
+npm run dev-para volver a ejecutar el servidor
+si cierro la terminal se cierra el servidor
+
+Se me complico el css por eso dividi cada CSS por cada JSX y el responsive

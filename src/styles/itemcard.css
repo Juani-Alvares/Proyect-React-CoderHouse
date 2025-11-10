@@ -1,0 +1,28 @@
+.item-card {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.item-card:hover {
+  transform: scale(1.02);
+}
+
+.item-card h3 {
+  margin: 0 0 10px 0;
+}
+
+.item-card button {
+  background-color: #00bfff;
+  border: none;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.item-card button:hover {
+  background-color: #009ccc;
+}

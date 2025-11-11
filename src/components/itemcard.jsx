@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../styles/itemcard.css";
 
 function ItemCard({ item }) {
@@ -7,7 +8,9 @@ function ItemCard({ item }) {
       <h3>{item.name}</h3>
       <p>Precio: ${item.price}</p>
       <p>Stock: {item.stock}</p>
-      <button>Ver detalle</button>
+      <Link to={`/detalle/${item.id}`}>
+        <button>Ver detalle</button>
+      </Link>
     </div>
   );
 }

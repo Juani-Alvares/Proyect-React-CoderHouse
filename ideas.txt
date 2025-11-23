@@ -17,6 +17,7 @@ https://firebase.google.com/?hl=es-419
 https://es.imgbb.com/
 
 
+Productos
 export const products = [
   { id: 1, name: "Remera Nike", price: 12000, stock: 10, category: "remeras" },
   { id: 2, name: "Pantalón Adidas", price: 18000, stock: 5, category: "pantalones" },

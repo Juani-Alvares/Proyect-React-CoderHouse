@@ -1,39 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import ItemCard from "./ItemCard";
+import ItemCard from "./itemcard";
 import "../styles/itemlistcontainer.css";
-import { products } from "../data/products";
 
-function ItemListContainer({ greeting }) {
+// Firebase
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../firebase/config";
+
+function ItemListContainer() {
   const [items, setItems] = useState([]);
-  const { categoriaId } = useParams();
+  const { categoryId } = useParams();
 
   useEffect(() => {
-    const getProducts = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(products);
-      }, 1000);
-    });
+    const productsRef = collection(db, "products");
 
-    getProducts.then((res) => {
-      if (categoriaId) {
-        setItems(res.filter((item) => item.category === categoriaId));
-      } else {
-        setItems(res);
-      }
-    });
-  }, [categoriaId]);
+    let q = productsRef;
+
+    if (categoryId) {
+      q = query(productsRef, where("category", "==", categoryId));
+    }
+
+    
+    getDocs(q)
+      .then((snapshot) => {
+        const docs = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setItems(docs);
+      })
+      .catch((e) => console.log("Error Firestore:", e));
+  }, [categoryId]);
 
   return (
-    <div className="item-list-container">
-      <h2>{greeting || "Productos"}</h2>
-      <div className="item-grid">
-        {items.length > 0 ? (
-          items.map((item) => <ItemCard key={item.id} item={item} />)
-        ) : (
-          <p className="loading">Cargando productos...</p>
-        )}
-      </div>
+    <div className="items-container">
+      {items.map((item) => (
+        <ItemCard key={item.id} item={item} />
+      ))}
     </div>
   );
 }

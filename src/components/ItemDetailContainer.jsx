@@ -1,31 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { products } from "../data/products";
+
+import "../styles/itemlistcontainer.css";
+
+import { db } from "../firebase/config";
+import { doc, getDoc } from "firebase/firestore";
 
 function ItemDetailContainer() {
+  const [item, setItem] = useState(null);
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    const getProduct = new Promise((resolve) => {
-      setTimeout(() => {
-        const found = products.find((p) => p.id === parseInt(id));
-        resolve(found);
-      }, 1000);
-    });
+    const docRef = doc(db, "products", id);
 
-    getProduct.then((res) => setProduct(res));
+    getDoc(docRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        setItem({ id: snapshot.id, ...snapshot.data() });
+      }
+    });
   }, [id]);
 
-  if (!product) return <p>Cargando detalle...</p>;
+  if (!item) return <p>Cargando...</p>;
 
   return (
     <div className="item-detail">
-      <h2>{product.name}</h2>
-      <p>Precio: ${product.price}</p>
-      <p>Stock: {product.stock}</p>
-      <p>Categoría: {product.category}</p>
-      <button>Agregar al carrito</button>
+      <h2>{item.name}</h2>
+      <p>Precio: ${item.price}</p>
+      <p>Stock: {item.stock}</p>
+      <p>Categoría: {item.category}</p>
     </div>
   );
 }

@@ -1,5 +1,9 @@
 .item-list-container {
   text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
 }
 
 .item-grid {
@@ -12,4 +16,24 @@
 .loading {
   color: #aaa;
   font-style: italic;
+}.filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.filters button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  background: cyan;
+  color: black;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filters button:hover {
+  background: white;
 }

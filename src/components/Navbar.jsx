@@ -1,21 +1,34 @@
-import { Link } from "react-router-dom";
-import "./../styles/Navbar.css";
+import { NavLink } from "react-router-dom";
+import "../styles/navbar.css";
 
 function Navbar() {
   return (
-    <header className="navbar">
-      <div className="navbar-container">
-        <h1 className="logo">Mi Tienda</h1>
-        <nav>
-          <ul>
-            <li><Link to="/">Inicio</Link></li>
-            <li><Link to="/categoria/remeras">Remeras</Link></li>
-            <li><Link to="/categoria/pantalones">Pantalones</Link></li>
-            <li><Link to="/categoria/zapatillas">Zapatillas</Link></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+    <nav className="navbar">
+      <h1 className="logo">Mi Tienda</h1>
+
+      <ul className="nav-links">
+        <li>
+          <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>
+            Inicio
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/category/remeras" className={({ isActive }) => isActive ? "active" : ""}>
+            Remeras
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/category/pantalones" className={({ isActive }) => isActive ? "active" : ""}>
+            Pantalones
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/category/zapatillas" className={({ isActive }) => isActive ? "active" : ""}>
+            Zapatillas
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
   );
 }
 

@@ -1,6 +1,7 @@
+// src/components/ItemListContainer.jsx
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import ItemCard from "./itemcard";
+import { useParams, useNavigate } from "react-router-dom";
+import ItemCard from "./ItemCard";
 import "../styles/itemlistcontainer.css";
 
 // Firebase
@@ -10,6 +11,7 @@ import { db } from "../firebase/config";
 function ItemListContainer() {
   const [items, setItems] = useState([]);
   const { categoryId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const productsRef = collection(db, "products");
@@ -20,23 +22,34 @@ function ItemListContainer() {
       q = query(productsRef, where("category", "==", categoryId));
     }
 
-    
-    getDocs(q)
-      .then((snapshot) => {
-        const docs = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setItems(docs);
-      })
-      .catch((e) => console.log("Error Firestore:", e));
+    getDocs(q).then((snapshot) => {
+      const docs = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setItems(docs);
+    });
   }, [categoryId]);
 
   return (
-    <div className="items-container">
-      {items.map((item) => (
-        <ItemCard key={item.id} item={item} />
-      ))}
+    <div>
+      
+      <div className="filters">
+        <button onClick={() => navigate("/")}>Todos</button>
+        <button onClick={() => navigate("/category/remeras")}>Remeras</button>
+        <button onClick={() => navigate("/category/pantalones")}>
+          Pantalones
+        </button>
+        <button onClick={() => navigate("/category/zapatillas")}>
+          Zapatillas
+        </button>
+      </div>
+
+      <div className="items-container">
+        {items.map((item) => (
+          <ItemCard key={item.id} item={item} />
+        ))}
+      </div>
     </div>
   );
 }

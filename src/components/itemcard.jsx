@@ -25,6 +25,7 @@ export default function ItemCard({ item }) {
       <Link to={`/detalle/${item.id}`}>
         <button className="btn-primary">Ver detalle</button>
       </Link>
+
     </div>
   );
 }

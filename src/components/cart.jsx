@@ -21,16 +21,16 @@ export default function Cart() {
           </div>
 
           <div className="qty-controls">
-            <button
-              onClick={() =>
-                updateQuantity(item.id, Math.max(1, (item.quantity || 1) - 1))
-              }
-            >
-              -
+            
+            <button onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}>
+            -
             </button>
+
             <span>{item.quantity || 1}</span>
+            
             <button onClick={() => updateQuantity(item.id, (item.quantity || 1) + 1)}>
               +
+            
             </button>
           </div>
 

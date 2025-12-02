@@ -1,12 +1,10 @@
 import React from "react";
 import "../styles/footer.css";
 
-function Footer() {
+export default function Footer(){
   return (
-    <footer>
-      <p>© {new Date().getFullYear()} Mi Tienda | Proyecto React - Coderhouse</p>
+    <footer style={{ padding:20, textAlign:"center", color:"var(--muted)" }}>
+      © {new Date().getFullYear()} Mi Tienda - Proyecto Final
     </footer>
   );
 }
-
-export default Footer;

@@ -1,57 +1,54 @@
-// src/components/ItemListContainer.jsx
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ItemCard from "./ItemCard";
 import "../styles/itemlistcontainer.css";
 
-// Firebase
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/config";
 
-function ItemListContainer() {
-  const [items, setItems] = useState([]);
-  const { categoryId } = useParams();
+export default function ItemListContainer() {
+  const { categoriaId } = useParams();
   const navigate = useNavigate();
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const productsRef = collection(db, "products");
+    setLoading(true);
 
+    const productsRef = collection(db, "products");
     let q = productsRef;
 
-    if (categoryId) {
-      q = query(productsRef, where("category", "==", categoryId));
+    if (categoriaId) {
+      q = query(productsRef, where("category", "==", categoriaId));
     }
 
-    getDocs(q).then((snapshot) => {
-      const docs = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setItems(docs);
-    });
-  }, [categoryId]);
+    getDocs(q)
+      .then(snapshot => {
+        const docs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setItems(docs);
+      })
+      .finally(() => setLoading(false));
+  }, [categoriaId]);
 
   return (
     <div>
-      
+
       <div className="filters">
         <button onClick={() => navigate("/")}>Todos</button>
-        <button onClick={() => navigate("/category/remeras")}>Remeras</button>
-        <button onClick={() => navigate("/category/pantalones")}>
-          Pantalones
-        </button>
-        <button onClick={() => navigate("/category/zapatillas")}>
-          Zapatillas
-        </button>
+        <button onClick={() => navigate("/categoria/remeras")}>Remeras</button>
+        <button onClick={() => navigate("/categoria/pantalones")}>Pantalones</button>
+        <button onClick={() => navigate("/categoria/zapatillas")}>Zapatillas</button>
       </div>
 
       <div className="items-container">
-        {items.map((item) => (
-          <ItemCard key={item.id} item={item} />
-        ))}
+        {loading ? (
+          <p>Cargando productos...</p>
+        ) : items.length === 0 ? (
+          <p>No hay productos para esta categoría.</p>
+        ) : (
+          items.map(item => <ItemCard key={item.id} item={item} />)
+        )}
       </div>
     </div>
   );
 }
-
-export default ItemListContainer;

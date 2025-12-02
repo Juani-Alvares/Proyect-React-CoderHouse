@@ -6,7 +6,7 @@ import "../styles/itemlistcontainer.css";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/config";
 
-export default function ItemListContainer() {
+export default function ItemListContainer({ greeting }) {
   const { categoriaId } = useParams();
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
@@ -23,15 +23,17 @@ export default function ItemListContainer() {
     }
 
     getDocs(q)
-      .then(snapshot => {
-        const docs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      .then((snapshot) => {
+        const docs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         setItems(docs);
       })
+      .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [categoriaId]);
 
   return (
     <div>
+      {greeting && <h2 style={{ textAlign: "center" }}>{greeting}</h2>}
 
       <div className="filters">
         <button onClick={() => navigate("/")}>Todos</button>
@@ -46,7 +48,7 @@ export default function ItemListContainer() {
         ) : items.length === 0 ? (
           <p>No hay productos para esta categoría.</p>
         ) : (
-          items.map(item => <ItemCard key={item.id} item={item} />)
+          items.map((item) => <ItemCard key={item.id} item={item} />)
         )}
       </div>
     </div>

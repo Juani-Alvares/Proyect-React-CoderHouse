@@ -13,9 +13,11 @@ export default function ItemCard({ item }) {
   const title = getField(item, "title", "Title", "nombre", "name");
   const price = getField(item, "price", "Price", "precio");
   const stock = getField(item, "stock", "Stock", "cantidad");
+  const img = getField(item, "img", "image", "picture");
 
   return (
     <div className="item-card">
+      {img && <img src={img} alt={title ?? "Producto"} className="item-img" />}
       <h3>{title ?? "Producto sin nombre"}</h3>
       <p>Precio: ${price ?? "N/A"}</p>
       <p>Stock: {stock ?? "N/A"}</p>

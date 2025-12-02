@@ -1,35 +1,10 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import "../styles/navbar.css";
-import CartWidget from "./CartWidget";
+import "../styles/footer.css";
 
-function Navbar() {
+export default function Footer() {
   return (
-    <nav className="navbar">
-      <div className="nav-left">
-        <h1 className="logo">Adidas?</h1>
-      </div>
-
-      <ul className="nav-links">
-        
-        <li>
-          <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>
-            Inicio
-          </NavLink>
-        </li>
-
-        <li>
-          <NavLink to="/contacto">Contacto</NavLink>
-        </li>
-
-        <li>
-          <NavLink to="/cart" className="cart-link">
-            <CartWidget />
-          </NavLink>
-        </li>
-      </ul>
-    </nav>
+    <footer style={{ padding: 20, textAlign: "center", color: "var(--muted)" }}>
+      © {new Date().getFullYear()} Mi Tienda - Proyecto Final
+    </footer>
   );
 }
-
-export default Navbar;

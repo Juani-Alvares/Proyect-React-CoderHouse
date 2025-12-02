@@ -1,50 +1,20 @@
-#  Proyecto React - Coderhouse
+# Proyecto Final — E-commerce React + Firebase
 
-## 📌 Descripción
-Este proyecto fue desarrollado como parte del curso **React JS** en **Coderhouse**.  
-Se trata de una tienda online simple que muestra un catálogo de productos utilizando componentes reutilizables y estilos modulares.
+## Descripción
+SPA de e-commerce construida con React. Permite navegar por un catálogo, ver detalle de productos, agregar unidades al carrito y completar compras. Productos y órdenes se almacenan en Firebase Firestore.
 
----
+## Funcionalidades principales
+- Listado dinámico de productos desde Firestore.  
+- Página de detalle por producto.  
+- Selector de cantidad (ItemCount) con validación de stock.  
+- Carrito global con React Context (persistencia en localStorage).  
+- Checkout que genera la orden en Firestore (ID visible al usuario).  
+- Navegación SPA con React Router.  
+- Mensajes y loaders (carrito vacío, producto sin stock, carga).
 
-## ⚙️ Tecnologías utilizadas
-- React JS - Vite
-- CSS modular
-- useState y useEffect
-- JSX limpio y estructurado
+## Tecnologías
+React, React Router DOM, Context API, Firebase (Firestore), CSS.
 
----
-
-## 🧩 Estructura del proyecto
-src/
-├── components/
-│ ├── Navbar.jsx
-│ ├── ItemCard.jsx
-│ ├── ItemListContainer.jsx
-│ └── Footer.jsx
-│
-├── data/
-│ └── products.js
-│
-├── styles/
-│ ├── global.css
-│ ├── navbar.css
-│ ├── itemcard.css
-│ ├── itemlistcontainer.css
-│ └── footer.css
-│
-├── App.jsx
-└── main.jsx
-
----
-
-## 🧠 Funcionalidades
-✅ Visualización del catálogo de productos.  
-✅ Simulación de carga asincrónica con promesa (useEffect + setTimeout).  
-✅ Modo oscuro con diseño limpio y profesional.  
-✅ Layout responsive adaptable a pantallas grandes y móviles.  
-✅ Código modular y reutilizable.
-
----
-Proyecto realizado por Juan Ignacio Alvares
-Curso React JS - Coderhouse
-Año 2025
+Autor
+Juan Ignacio Alvares
+Proyecto - Final React CoderHouse

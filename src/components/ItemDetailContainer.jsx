@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import ItemCount from "./ItemCount";
@@ -12,16 +12,17 @@ export default function ItemDetailContainer() {
   const [loading, setLoading] = useState(true);
   const { addToCart } = useContext(CartContext);
   const [added, setAdded] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
     const ref = doc(db, "products", id);
     getDoc(ref)
-      .then(snapshot => {
+      .then((snapshot) => {
         if (snapshot.exists()) setItem({ id: snapshot.id, ...snapshot.data() });
         else setItem(null);
       })
-      .catch(err => console.error(err))
+      .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [id]);
 
@@ -48,7 +49,7 @@ export default function ItemDetailContainer() {
       ) : (
         <div>
           <p>Agregado al carrito</p>
-          <button onClick={() => window.location.href = "/cart"}>Ir al carrito</button>
+          <button onClick={() => navigate("/cart")}>Ir al carrito</button>
         </div>
       )}
     </div>

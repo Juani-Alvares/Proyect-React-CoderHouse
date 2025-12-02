@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import ItemListContainer from "./components/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import Cart from "./components/Cart";
-import Footer from "./components/footer";
+import Footer from "./components/Footer";
 import Contacto from "./components/Contacto";
 import { CartProvider } from "./context/CartContext";
 import "./styles/global.css";
@@ -17,35 +17,20 @@ function App() {
 
         <main>
           <Routes>
-            <Route 
-              path="/" 
-              element={<ItemListContainer greeting="Catálogo de Productos" />} 
+            <Route
+              path="/"
+              element={<ItemListContainer greeting="Catálogo de Productos" />}
             />
 
-            <Route 
-              path="/categoria/:categoriaId" 
-              element={<ItemListContainer />} 
-            />
+            <Route path="/categoria/:categoriaId" element={<ItemListContainer />} />
 
-            <Route 
-              path="/detalle/:id" 
-              element={<ItemDetailContainer />} 
-            />
+            <Route path="/detalle/:id" element={<ItemDetailContainer />} />
 
-            <Route 
-              path="/cart" 
-              element={<Cart />} 
-            />
+            <Route path="/cart" element={<Cart />} />
 
-            <Route 
-              path="/contacto" 
-              element={<Contacto />} 
-            />
+            <Route path="/contacto" element={<Contacto />} />
 
-            <Route 
-              path="*" 
-              element={<h2>Página no encontrada</h2>} 
-            />
+            <Route path="*" element={<h2>Página no encontrada</h2>} />
           </Routes>
         </main>
 
